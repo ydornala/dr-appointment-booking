@@ -1,0 +1,34 @@
+entity Patient {
+    fullname String required minlength(3)
+    gender Gender required
+    phone String required
+    address String required
+    email String
+    birthdate LocalDate required
+}
+
+entity Appointment {
+    fixedDate Instant required
+    symptoms String 
+    status Status required
+    startTime Instant 
+    endTime Instant
+}
+
+enum Status {
+	PENDING, IN_PROGRESS, DONE
+}
+
+enum Gender {
+	MALE, FEMALE, OTHERS
+}
+
+relationship OneToMany {
+    Patient{appoinments} to Appointment
+}
+
+// relationship OneToOne {
+//     Appointment{patient(fullname)} to Patient
+// }
+
+service all with serviceImpl
